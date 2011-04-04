@@ -38,9 +38,9 @@ class Data247
         begin
           Timeout::timeout(self.timeout) do
             data=Hash.from_xml(open("https://api.data24-7.com/carrier.php?username=#{self.username}&password=#{self.password}&p1=#{msisdn}").read)["response"]["results"]["result"]
-            status=data["status"]
-            operator_name=data["carrier_name"]
-            operator_code=data["carrier_id"]
+            status=data["status"].to_s.strip
+            operator_name=data["carrier_name"].to_s.strip
+            operator_code=data["carrier_id"].to_s.strip
             unless status != "OK"
               return new(:operator_name=> operator_name, :operator_code => operator_code, :msisdn => msisdn, :status=>status)
             else
