@@ -12,7 +12,7 @@ The usual way you'd do a lookup
 
   Data247.username = "meeeeee"
   Data247.password = "verysecret"
-  data247 = Comcetera.detect(31612345678)
+  data247 = Data247.detect(31612345678)
   data247.operator_code # => "20415"
 	data247.operator_name # => "T-Mobile Netherlands"
   data247.msisdn        # => "31612345678"
