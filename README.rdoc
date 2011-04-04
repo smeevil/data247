@@ -1,0 +1,43 @@
+= Data247
+
+A simple wrapper for the NumberPortabilityLookup service of Data24-7. Give them a msisdn and they (usually) give you an operator code. Compile your own list of relevant codes.
+
+I'm scratching my own itch here, so I'm only adding what I use. Feedback and patches are welcome.
+
+For more info about the service, take a look at: http://data24-7.com/
+
+== Example
+
+The usual way you'd do a lookup
+
+  Data247.username = "meeeeee"
+  Data247.password = "verysecret"
+  data247 = Comcetera.detect(31612345678)
+  data247.operator_code # => "20415"
+	data247.operator_name # => "T-Mobile Netherlands"
+  data247.msisdn        # => "31612345678"
+
+When the lookup does not work due to a timeout
+
+  Data247.detect(31612345678) # => nil
+
+This means that the amount of retries specified as Data247.retries have all timed out after Data247.timeout seconds. You can retry at a later time or do something else. This is great if, as is my use case, the lookup is used as a type of pre-selection for numbers.
+
+== Note on Patches/Pull Requests
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Contributors
+
+* Gerard 'smeevil' de Brieder
+* Wes 'Narnach' Oldenbeuving
+
+== Copyright
+
+Copyright (c) 2011 Gerard de Brieder. See LICENSE for details.
