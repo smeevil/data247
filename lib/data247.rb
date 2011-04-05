@@ -37,7 +37,7 @@ class Data247
         attempts += 1
         begin
           Timeout::timeout(self.timeout) do
-            data=Hash.from_xml(open("https://api.data24-7.com/carrier.php?username=#{self.username}&password=#{self.password}&p1=#{msisdn}").read)["response"]["results"]["result"]
+            data=Hash.from_xml(open("http://api.data24-7.com/carrier.php?username=#{self.username}&password=#{self.password}&p1=#{msisdn}").read)["response"]["results"]["result"]
             status=data["status"].to_s.strip
             operator_name=data["carrier_name"].to_s.strip
             operator_code=data["carrier_id"].to_s.strip
