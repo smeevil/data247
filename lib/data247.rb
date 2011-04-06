@@ -57,10 +57,10 @@ class Data247
     def setup_fakeweb_response(options={})
       raise "FakeWeb is not defined. Please require 'fakeweb' and make sure the fakeweb rubygem is installed." unless defined?(FakeWeb)
       raise ArgumentError.new("Option missing: :msisdn") unless options[:msisdn]
-      raise ArgumentError.new("Option missing: :status") unless options[:status]
+      options[:status] ||= "OK"
       options[:username]||= self.username
       options[:password]||= self.password
-      FakeWeb.register_uri :get, "https://api.data24-7.com/carrier.php?username=#{options[:username]}&password=#{options[:password]}&p1=#{options[:msisdn]}", :body=> <<-MSG
+      FakeWeb.register_uri :get, "http://api.data24-7.com/carrier.php?username=#{options[:username]}&password=#{options[:password]}&p1=#{options[:msisdn]}", :body=> <<-MSG
 <?xml version="1.0"?><response><results><result item="1"><status>#{options[:status]}</status><number>#{options[:msisdn]}</number><wless>y</wless><carrier_name>T-Mobile</carrier_name><carrier_id>#{options[:result]}</carrier_id><sms_address>#{options[:msisdn]}@tmomail.net</sms_address><mms_address>#{options[:msisdn]}@tmomail.net</mms_address></result></results><balance>21.5000</balance></response>
 MSG
     end
