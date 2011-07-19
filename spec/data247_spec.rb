@@ -21,16 +21,20 @@ describe "Data247" do
     end
 
     describe "the returned Data247 instance" do
-      before(:each) do
-        @data247 = Data247.detect("31612345678")
-      end
+      let(:data247) { Data247.detect("31612345678") }
 
       it "should contain the returned operator code" do
-        @data247.operator_code.should == "12345"
+        data247.operator_code.should == "12345"
       end
 
       it "should contain the returned msisdn" do
-        @data247.msisdn.should == "31612345678"
+        data247.msisdn.should == "31612345678"
+      end
+
+      it "should contain the operator name" do
+        Data247.setup_fakeweb_response(:msisdn=>"31612345679", :status=>"OK", :result => 130730, :operator=>"KPN")
+        data = Data247.detect("31612345679")
+        data.operator_name.should == "KPN"
       end
     end
 
